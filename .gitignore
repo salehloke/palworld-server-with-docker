@@ -1,2 +1,11 @@
+# Ignore all files inside palworld
+/palworld/*
+
+# Exclude (i.e. "unignore") the backups folder
+!/palworld/backups/
+
+# Keep ignoring everything in game/
+# (unchanged from your current .gitignore)
+ /game
 /palworld
 /game
