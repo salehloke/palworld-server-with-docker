@@ -3,28 +3,29 @@ services:
       image: thijsvanloef/palworld-server-docker:latest
       restart: unless-stopped
       container_name: palworld-server
-      stop_grace_period: 30s # Set to however long you are willing to wait for the container to gracefully stop
+      stop_grace_period: 30s
       ports:
         - 8212:8212/udp
         - 27016:27016/udp
-        # - 8212:8212/tcp  # Port for REST API if REST_API_ENABLED: true
+        - 8212:8212/tcp  # REST API port
       env_file:
         - .env
       environment:
          PUID: 1000
          PGID: 1000
-         PORT: 8212 # Optional but recommended
-         PLAYERS: 16 # Optional but recommended
-         SERVER_PASSWORD: 'salehB0ss' # Optional but recommended
+         PORT: 8212
+         PLAYERS: 16
+         SERVER_PASSWORD: 'salehB0ss'
          MULTITHREADING: "true"
-         RCON_ENABLED: "true"
-         RCON_PORT: 25575
+         RCON_ENABLED: "false"
+         REST_API_ENABLED: "true"
+         REST_API_PORT: 8212
          TZ: "UTC"
          ADMIN_PASSWORD: 'salehB0ss'
-         COMMUNITY: "true"  # Enable this if you want your server to show up in the community servers tab, USE WITH SERVER_PASSWORD!
+         COMMUNITY: "true"
          SERVER_NAME: "Bandar Enstek by Loki"
          SERVER_DESCRIPTION: "palworld running on a docker by SalehLoke"
-         ALLOW_CONNECT_PLATFORM: "Steam" # Defaults to "Steam" if not set, set this to "Xbox" if you want to host a server for Xbox players. CROSSPLAY BETWEEN XBOX-STEAM IS NOT YET SUPPORTED
+         ALLOW_CONNECT_PLATFORM: "Steam"
       volumes:
          - ./palworld:/palworld/
          - ./save:/home/steam/Pal/Saved/SaveGames/
